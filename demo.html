@@ -4,58 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Select2 Example with Dynamic Ordering</title>
-    <!-- Include jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Include Select2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <!-- Include Select2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <title>Document</title>
 </head>
 
 <body>
-
-    <h2>Select2 Example with Dynamic Ordering</h2>
-
-    <!-- Select element with data -->
-    <label for="select_with_data">Select with Data:</label>
-    <select id="select_with_data" multiple style="width: 300px;"></select>
-
-    <br><br>
-
     <script>
-        $(document).ready(function () {
-            // Initialize Select2 with options
-            const selectElement = $("#select_with_data").select2({
-                data: [
-                    { id: '1', text: 'Facebook' },
-                    { id: '2', text: 'YouTube' },
-                    { id: '3', text: 'Instagram' },
-                    { id: '4', text: 'Pinterest' },
-                    { id: '5', text: 'Twitter' }
-                ]
-            });
-
-            // Event listener for selection changes
-            selectElement.on('select2:select', function (e) {
-                let selectedId = e.params.data.id;
-                let selectedText = e.params.data.text;
-
-                // Remove the selected option from its original position
-                $(`#select_with_data option[value="${selectedId}"]`).remove();
-
-                // Append it to the end of the select element
-                $('#select_with_data').append(`<option value="${selectedId}" selected>${selectedText}</option>`);
-
-                // Trigger change to update the Select2 view
-                selectElement.trigger('change');
-                console.log($("#select_with_data").val());
+        const User = class {
+            static users = [];
+            constructor(name, email, password,) {
+                this.name = name;
+                this.email = email;
+                this.password = password;
+                this.createdDate = new Date().toLocaleDateString() + new Date().toLocaleTimeString();
                 
-            });
-            $("#select_with_data").val();
-        });
-    </script>
+            }
 
+            static createUser(name, email, password) {
+                const newUser = new User(name, email, password);
+                User.users.push(newUser);
+                return newUser;
+            }
+            
+            static getUserByEmail(email){
+                return User.users.find(user => user.email === email)
+            }
+        }
+
+        let myUser = new User("Rishi", "avviare.rishi@gmail.com", "Rishi@1234$");
+        console.log(User.getUserByEmail("avviare.rishi@gmail.com"));
+
+    </script>
 </body>
 
 </html>
