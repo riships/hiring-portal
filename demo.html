@@ -28,10 +28,15 @@
             static getUserByEmail(email){
                 return User.users.find(user => user.email === email)
             }
+            
         }
 
-        let myUser = new User("Rishi", "avviare.rishi@gmail.com", "Rishi@1234$");
+        let myUser = User.createUser("Rishi", "avviare.rishi@gmail.com", "Rishi@1234$");
+        let myUser1 = User.createUser("Rishi1", "avviare1.rishi@gmail.com", "Rishi@1234$");
+        let myUser2 = User.createUser("Rishi2", "avviare2.rishi@gmail.com", "Rishi@1234$");
         console.log(User.getUserByEmail("avviare.rishi@gmail.com"));
+        console.log(User.getUserByEmail("avviare1.rishi@gmail.com"));
+        console.log(User.getUserByEmail("avviare2.rishi@gmail.com"));
 
     </script>
 </body>
