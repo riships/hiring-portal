@@ -1,11 +1,18 @@
 const express = require('express');
 const { router } = require('./router/user.router');
+const path = require('path');
 
 const app = express();
 
 
 app.set('view engine', 'ejs');
-app.set('views', './views');
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', './public/views');
+
+app.get('/CSS/style.css', (req, res) => {
+    res.type('text/css');
+    res.sendFile(path.join(__dirname, 'css/style.css'));
+});
 
 app.use(express.json());
 
