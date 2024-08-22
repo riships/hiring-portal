@@ -1,3 +1,4 @@
+let User = [{ name: "rishi", email: "avviare.rishi@gmail.com", password: "rishi@1234", createdDate: "" }]
 export default User = class {
     static users = [];
     constructor(name, email, password,) {

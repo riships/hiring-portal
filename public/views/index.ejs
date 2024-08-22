@@ -49,13 +49,38 @@
         </div>
     </header>
     <main>
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="hero-section h-100 d-flex flex-column justify-content-center align-content-start">
+                            <div class="hero-title">
+                                <h1 class="fw-bold">Discover Your Passion</h1>
+                                <p>Unleash your potential and thrive in your dream role. Explore exciting opportunities where your passion meets your
+                                career.</p>
+                            </div>
+                            <div class="hero-buttons">
+                                <a href="/job-seeker" class="btn job-seeker-btn">I'm a Job Seeker</a>
+                                <a href="/employer" class="btn employer-btn">I'm an Employer</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="d-flex justify-content-center align-items-center my-5">
+                            <img src="../images/landing-page-image.webp" class="w-75 rounded-4 shadow"
+                                alt="job-portal-img-landing-page">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" style="color: #674bb1;" id="exampleModalLongTitle">Experience easily!
-                        </h5>
+                        <h2 class="modal-title" style="color: #674bb1;" id="exampleModalLongTitle">Log in
+                        </h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         </button>
                     </div>
@@ -63,14 +88,13 @@
                         <div class="row d-flex justify-content-center align-items-center">
                             <div class="col-12">
                                 <div class="container">
-                                    <h2 class="login-title">Log in</h2>
-
-                                    <form class="login-form">
-                                        <div>
+                                    <!-- <h2 class="login-title">Log in</h2> -->
+                                    <form class="login-form" action="api/login" method="post">
+                                        <!-- <div>
                                             <label for="name">Name </label>
                                             <input id="name" type="text" placeholder="Eren Buruk" name="name"
                                                 required />
-                                        </div>
+                                        </div> -->
 
                                         <div>
                                             <label for="email">Email </label>
@@ -95,8 +119,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary border-0" style="background-color: #674bb1;">Save
-                            changes</button>
+                        <!-- <button type="button" class="btn btn-primary border-0" style="background-color: #674bb1;">Save
+                            changes</button> -->
                     </div>
                 </div>
             </div>
