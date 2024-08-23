@@ -1,13 +1,16 @@
 const express = require('express');
 const {router} = require('./router/user.router');
 const path = require('path');
+const expressLayouts = require('express-ejs-layouts');
 
 const app = express();
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', './public/views');
+app.use(expressLayouts)
+app.set('layout', 'layout');
 
 app.get('/CSS/style.css', (req, res) => {
     res.type('text/css');
@@ -15,18 +18,14 @@ app.get('/CSS/style.css', (req, res) => {
 });
 
 app.use(express.json());
-
 const PORT = process.env.PORT || 3000;
 
-app.get("/", (req, res) => {
-    res.render('index')
-})
 
-app.use("/api", router);
+app.use("/", router);
 
 
 app.listen(PORT, (err) => {
     if (!err) {
-        console.log(`Server is running on port: , http://localhost:${PORT}/api`);
+        console.log(`Server is running on port: , http://localhost:${PORT}`);
     }
 });
