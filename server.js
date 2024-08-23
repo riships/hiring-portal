@@ -1,5 +1,5 @@
 const express = require('express');
-const {router} = require('./router/user.router');
+const { router } = require('./router/user.routes');
 const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 

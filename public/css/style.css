@@ -64,15 +64,11 @@ body {
     cursor: pointer;
     font-family: inherit;
     transition: all 0.3s;
+    border: 2px solid #fff;
 }
 
 .login-form>button {
     outline: 1px solid #6f4cba;
-}
-
-.login-form>button:hover {
-    background-color: #884ecc;
-    color: #fff;
 }
 
 .hero-title {
@@ -105,6 +101,8 @@ body {
     color: #aa4dbc;
     background-color: #fff;
     transition: background-color 0.3s, color 0.3s;
+    border: 2px solid #fff;
+
 }
 
 .job-seeker-btn {

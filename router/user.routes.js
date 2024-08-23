@@ -1,10 +1,10 @@
 const express = require('express');
-const { userLogin, userLoginNew, homePage } = require('../controller/user.controller');
+const { userLogin, userLoginView, homePage } = require('../controller/user.controller');
 const router = express.Router();
 
 router.route('/login')
     .post(userLogin)
-    .get(userLoginNew);
+    .get(userLoginView);
 router.route('/')
     .get(homePage);
 

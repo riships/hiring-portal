@@ -50,18 +50,19 @@ const userSignup = async function (req, res) {
         }
 
         // if everything ok return the user
+        res.coockie({ "lastVisted": Date().toLocalString() })
         return res.status(200).json({ message: "Login successful." });
 
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal server error." });
     }
 }
-const userLoginNew = async function (req, res) {
+const userLoginView = async function (req, res) {
     res.render("login")
 }
 
-const homePage = async function (req,res) {
+const homePage = async function (req, res) {
     res.render("index")
 }
 
-module.exports = { userLogin, userSignup, userLoginNew, homePage };
+module.exports = { userLogin, userSignup, userLoginView, homePage };
