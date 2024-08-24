@@ -1,4 +1,4 @@
-module.exports = User = class {
+module.exports = User= class {
     static users = [{ name: "rishi", email: "avviare.rishi@gmail.com", password: "rishi@1234", createdDate: "" }];
     constructor(name, email, password,) {
         this.name = name;

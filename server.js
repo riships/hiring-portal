@@ -1,7 +1,8 @@
 const express = require('express');
-const { router } = require('./router/user.routes');
 const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
+const viewRouter = require('./router/view.routes');
+const apiRouter = require("./router/api.routes")
 
 const app = express();
 
@@ -21,7 +22,9 @@ app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
 
-app.use("/", router);
+app.use("/", viewRouter);
+
+app.use("/api", apiRouter);
 
 
 app.listen(PORT, (err) => {
