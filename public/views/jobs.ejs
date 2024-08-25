@@ -1,0 +1,36 @@
+<div class="container mt-4">
+    <div class="d-flex gap-3 justify-content-start flex-wrap">
+        <% jobs.forEach((job)=> { 
+            const applybyDate = new Date(job.applyby);
+            const jobPostedDate = new Date(job.jobposted);
+            %>
+        <div class="card shadow-sm card-custom">
+            <div class="card-body">
+                <h5 class="card-title"><%= job.jobdesignation %></h5>
+                <h6 class="card-subtitle mb-2 text-muted"><%= job.jobcategory %></h6>
+
+                <p class="card-text">
+                    <strong>Company:</strong> <%= job.companyname %><br>
+                    <strong>Location:</strong><%= job.joblocation %><br>
+                    <strong>Salary:</strong> <%= job.salary %><br>
+                    <strong>Application Deadline:</strong> <%= applybyDate.toDateString() %><br>
+                    <strong>Job Posted:</strong> <%= jobPostedDate.toDateString() %><br>
+                </p>
+
+                <h6>Skills Required:</h6>
+                <ul class="list-inline">
+                    <% job.skillsrequired.forEach((skill)=> { %>
+                    <li class="list-inline-item badge bg-primary"><%= skill %></li>
+                    <% }) %>
+                </ul>
+
+                <div class="mt-3">
+                    <span class="badge bg-success"><%= job.numberofopenings %> Openings</span>
+                </div>
+
+                <a href="/jobForm" class="btn btn-primary mt-3">Apply Now</a>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</div>

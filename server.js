@@ -2,7 +2,8 @@ const express = require('express');
 const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 const viewRouter = require('./router/view.routes');
-const apiRouter = require("./router/api.routes")
+const userApiRouter = require("./router/userApi.routes")
+const jobApiRouter = require("./router/jobApi.routes")
 
 const app = express();
 
@@ -24,7 +25,8 @@ const PORT = process.env.PORT || 3000;
 
 app.use("/", viewRouter);
 
-app.use("/api", apiRouter);
+app.use("/api", jobApiRouter);
+app.use("/api", userApiRouter);
 
 
 app.listen(PORT, (err) => {

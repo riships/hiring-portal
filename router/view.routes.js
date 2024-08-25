@@ -13,16 +13,17 @@ router.get('/login', (req, res) => {
 });
 
 // jobs page route
-router.get("/jobs", async (req,res)=>{
+router.get("/jobs", async (req, res) => {
     try {
         // Fetch data from APIs
-        const jobsData = await axios.get("api/jobs")
-        console.log(jobsData);        
+        const jobsData = await axios.get("http://localhost:3000/api/jobs")
         
+        res.render("jobs", { title: 'Jobs', jobs: jobsData.data.data });
+
     } catch (error) {
-        console.error('Error fetching data:', error);
         res.status(500).send('Failed to load data');
     }
+
 })
 
 module.exports = router;

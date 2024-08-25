@@ -16,7 +16,7 @@ module.exports = ApplicantsService = class {
         return applicant;
     }
 
-    static getAllApplicates(applicantid) {
+    static getApplicates(applicantid) {
         if (id) {
             return this.allApplicant.find(applicant.applicantid === applicantid);
         }
@@ -36,11 +36,16 @@ module.exports = ApplicantsService = class {
         return updatedApplicant;
     }
 
-    static removeApplicant(applicantid){
+    static removeApplicant(applicantid) {
         if (!applicantid) {
             return null;
         }
-        let deletedApplicant = this.allApplicant.find(applicant.applicantid === applicantid);
+        let applicantIndex = this.allApplicant.findIndex(applicant.applicantid === applicantid);
 
+        if (applicantIndex === -1) {
+            return null;
+        }
+
+        return this.allApplicant.slice(applicantIndex, 1)[0];
     }
 }

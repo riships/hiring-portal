@@ -8,7 +8,4 @@ router.post('/login', userLogin);
 // Signup api
 router.post('/signup', userSignup);
 
-// for job listing
-router.get("/jobs", alljobs)
-
 module.exports = router;

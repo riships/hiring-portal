@@ -1,7 +1,6 @@
+const ApplicantsService = require("./applicants.model");
 
-
-
-module.exports = JobService = class {
+module.exports = class JobService {
     static jobOpenings = [
         {
             id: '603d4f1f2f1b2c001c8b4567',
@@ -71,8 +70,8 @@ module.exports = JobService = class {
     }
 
 
-    static createJobPost(id, jobcategory, jobdesignation, joblocation, companyname, salary, applyby, skillsrequired, numberofopenings, jobposted, applicants) {
-        let createdJob = new Job(id, jobcategory, jobdesignation, joblocation, companyname, salary, applyby, skillsrequired, numberofopenings, jobposted, applicants);
+    static createJobPost(jobObj) {
+        let createdJob = new JobService(jobObj);
         JobService.jobOpenings.push(createdJob);
         return createdJob
     }
@@ -80,10 +79,10 @@ module.exports = JobService = class {
     static findJobs(id) {
         if (id) {
             let job = this.jobOpenings.find(job => job.id === id);
-            return job;  
+            return job || null;
         }
         return this.jobOpenings;
-        
+
     }
 
     static findAndupdateJob(id, updatedData) {
@@ -92,7 +91,7 @@ module.exports = JobService = class {
             return null;
         }
         Object.assign(job, updatedData);
-        return job; 
+        return job;
     }
 
 
@@ -101,14 +100,32 @@ module.exports = JobService = class {
         if (!job) {
             return null;
         }
-        return job.applicants;
+
+        const applicants = job.applicants.map(applicantId =>
+            ApplicantsService.getApplicant(applicantId)
+        ).filter(applicant => applicant !== null);
+        return applicants;
     }
 
-    static AddApplicatsOfJob(id) {
-        let job = this.jobOpenings.find(job => job.id === id);
-        if (!job) {
+    static addApplicantToJob(jobId, applicantId) {
+        if (!applicantId && !jobId) {
             return null;
         }
-        return job.applicants;
+
+        let jobObj = this.jobOpenings.find(job.id === id);
+        jobObj.applicants.push(applicantId)
+
     }
+
+    static removeApplicant(jobId, applicantId) {
+        if (!jobId && !applicantId) {
+            return null;
+        }
+        let findJob = this.jobOpenings.find(job.id === jobId);
+        let applicantIndex = findJob.applicants.findIndex(appli === applicantId);
+
+        return findJob.applicants.splice(applicantIndex, 1)[0];
+
+    }
+
 }
