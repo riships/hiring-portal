@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card py-5 px-4" style="background: #ffffff1c !important;min-width: 400px;">
+        <h2 class="login-title">Sign Up</h2>
+        <form class="login-form" action="api/signup" method="post">
+            <div>
+                <label for="name">Name </label>
+                <input id="name" type="name" placeholder="Name" name="name" required />
+            </div>
+            <div>
+                <label for="email">Email </label>
+                <input id="email" type="email" placeholder="me@example.com" name="email" required />
+            </div>
+
+            <div>
+                <label for="password">Password </label>
+                <input id="password" type="password" placeholder="password" name="password" required />
+            </div>
+
+            <button class="btn btn--form" type="submit">
+                Sign up
+            </button>
+            
+            <p>or</p>
+
+            <button class="btn btn--form" type="submit">
+                Log in
+            </button>
+        </form>
+    </div>
+</div>

@@ -2,15 +2,21 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
-// login page route
+// Home page route
 router.get('/', (req, res) => {
     res.render('index', { title: 'Home' });
 });
 
-// signup page route
+// Login page route
 router.get('/login', (req, res) => {
     res.render('login', { title: 'Login' });
 });
+
+// signup page route
+router.get('/signup', (req, res) => {
+    res.render('signup', { title: 'SignUp' });
+});
+
 
 // jobs page route
 router.get("/jobs", async (req, res) => {
