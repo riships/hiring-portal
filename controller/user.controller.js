@@ -1,4 +1,5 @@
 const User = require('../model/user.model');
+const base64url = require('base64url');
 
 
 const userLogin = async function (req, res) {
@@ -22,7 +23,15 @@ const userLogin = async function (req, res) {
         }
 
         // if everything ok return the user
-        return res.status(200).json({ message: "Login successful.", name: user.name });
+        let sessionData = base64url.encode(JSON.stringify(user));
+
+        // Set the cookie
+        res.cookie('session', sessionData, {
+            httpOnly: true, // Prevent client-side JavaScript from accessing the cookie
+            maxAge: 24 * 60 * 60 * 1000 // Cookie expiration time (24 hours)
+        });
+
+        res.redirect('/');
 
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal server error." });

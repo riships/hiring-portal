@@ -4,32 +4,18 @@ const axios = require('axios');
 
 // Home page route
 router.get('/', (req, res) => {
-    res.render('index', { title: 'Home' });
+    res.render('index',{ title: 'Home', name: null, });
 });
 
 // Login page route
 router.get('/login', (req, res) => {
-    res.render('login', { title: 'Login' });
+    res.render('login', { title: 'Login', name: null, });
 });
 
 // signup page route
 router.get('/signup', (req, res) => {
-    res.render('signup', { title: 'SignUp' });
+    res.render('signup', { title: 'SignUp', name: null, });
 });
 
-
-// jobs page route
-router.get("/jobs", async (req, res) => {
-    try {
-        // Fetch data from APIs
-        const jobsData = await axios.get("http://localhost:3000/api/jobs")
-        
-        res.render("jobs", { title: 'Jobs', jobs: jobsData.data.data });
-
-    } catch (error) {
-        res.status(500).send('Failed to load data');
-    }
-
-})
 
 module.exports = router;
