@@ -1,4 +1,5 @@
 const ApplicantsService = require("./applicants.model");
+const { v4: uuidv4 } = require('uuid');
 
 module.exports = class JobService {
     static jobOpenings = [
@@ -55,8 +56,8 @@ module.exports = class JobService {
             applicants: []
         }
     ];
-    constructor(id, jobcategory, jobdesignation, joblocation, companyname, salary, applyby, skillsrequired, numberofopenings, jobposted, applicants) {
-        this.id = id;
+    constructor({ jobcategory, jobdesignation, joblocation, companyname, salary, applyby, skillsrequired, numberofopenings, jobposted }) {
+        this.id = uuidv4();
         this.jobcategory = jobcategory;
         this.jobdesignation = jobdesignation;
         this.joblocation = joblocation;
@@ -66,7 +67,7 @@ module.exports = class JobService {
         this.skillsrequired = skillsrequired;
         this.numberofopenings = numberofopenings;
         this.jobposted = jobposted;
-        this.applicants = applicants;
+        this.applicants = [];
     }
 
 

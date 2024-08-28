@@ -49,11 +49,11 @@ const userSignup = async function (req, res) {
         // Create user 
         let user = await User.createUser(name, email, password);
         if (!user) {
-            return res.status(401).json({ success: false, message: "User not found!" })
+            return res.render({message: "User not Created!" })
         }
 
         // if everything ok return the user created
-        return res.status(201).json({ message: "User created successfully." });
+        return res.status;
 
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal server error." });

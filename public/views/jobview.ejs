@@ -1,0 +1,43 @@
+<div class="container mt-4">
+    <h1 class="mb-4">Job Details</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"><i class="bi bi-briefcase"></i>
+                <%= job.jobcategory %>
+            </h5>
+            <p class="card-text"><i class="bi bi-tags"></i> <strong>Category:</strong>
+                <%= job.jobcategory %>
+            </p>
+            <p class="card-text"><i class="bi bi-person"></i> <strong>Designation:</strong>
+                <%= job.jobdesignation %>
+            </p>
+            <p class="card-text"><i class="bi bi-geo-alt"></i> <strong>Location:</strong>
+                <%= job.joblocation %>
+            </p>
+            <p class="card-text"><i class="bi bi-building"></i> <strong>Company:</strong>
+                <%= job.companyname %>
+            </p>
+            <p class="card-text"><i class="bi bi-cash"></i> <strong>Salary:</strong>
+                <%= job.salary %>
+            </p>
+            <p class="card-text"><i class="bi bi-calendar"></i> <strong>Application Deadline:</strong>
+                <%= job.applyby.toDateString() %>
+            </p>
+            <p class="card-text"><i class="bi bi-tools"></i> <strong>Required Skills:</strong>
+                <%= job.skillsrequired.join(', ') %></p>
+                <p class="card-text"><i class="bi bi-people"></i> <strong>Number of Openings:</strong> 
+                    <%= job.numberofopenings %></p>
+                <p class="card-text"><i class="bi bi-calendar-day"></i> <strong>Job Posted Date:</strong> 
+                    <%= job.jobposted.toDateString() %></p>
+                
+                <div class="d-flex justify-content-start gap-3 mt-4">
+                    <a href="/jobs/edit/<%= job.id %>" class="px-4 py-2 btn-custom btn-custom-warning"><i class="bi bi-pencil"></i> Edit</a>
+                    <a href="/jobs/apply/<%= job.id %>" class="px-4 py-2 btn-custom btn-custom-success"><i class="bi bi-send"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-4">
+            <a href="/jobs" class="btn btn-primary">Back to Job Listings</a>
+        </div>
+    </div>

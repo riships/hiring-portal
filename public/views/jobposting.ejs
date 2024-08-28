@@ -1,71 +1,110 @@
 <!-- views/jobForm.ejs -->
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Job Details Form</h1>
-        <form action="/submit-job" method="POST">
-            <!-- Job Category -->
-            <div class="mb-3">
+<div class="my-5 d-flex flex-column align-items-center">
+    <h1 class="text-center mb-4">
+        <%= job ? 'Edit Job Details' : 'Add New Job' %>
+    </h1>
+    <form style="width:450px; max-width: 450px;" action="<%= job ? `/jobs/${job._id}/edit` : '/jobs' %>" method="POST">
+        <!-- Job Category -->
+        <div class="row">
+            <div class="col-md-12 col-sm-12 mb-2">
                 <label for="jobcategory" class="form-label">Job Category</label>
-                <input type="text" class="form-control" id="jobcategory" name="jobcategory"
-                    value="<%= job.jobcategory %>" required>
+                <select class="form-select" id="jobcategory" name="jobcategory" required>
+                    <option value="" disabled selected>Select a category</option>
+                    <option value="Software Development" <%=job && job.jobcategory==='Software Development' ? 'selected'
+                        : '' %>
+                        >Software Development</option>
+                    <option value="Data Science" <%=job && job.jobcategory==='Data Science' ? 'selected' : '' %>>Data
+                        Science
+                    </option>
+                    <option value="Project Management" <%=job && job.jobcategory==='Project Management' ? 'selected'
+                        : '' %>
+                        >Project
+                        Management</option>
+                    <option value="Design" <%=job && job.jobcategory==='Design' ? 'selected' : '' %>>Design</option>
+                    <!-- Add more categories as needed -->
+                </select>
             </div>
 
             <!-- Job Designation -->
-            <div class="mb-3">
+            <div class="col-md-12 col-sm-12 mb-2">
                 <label for="jobdesignation" class="form-label">Job Designation</label>
-                <input type="text" class="form-control" id="jobdesignation" name="jobdesignation"
-                    value="<%= job.jobdesignation %>" required>
+                <select class="form-select" id="jobdesignation" name="jobdesignation" required>
+                    <option value="" disabled selected>Select a designation</option>
+                    <option value="Software Engineer" <%=job && job.jobdesignation==='Software Engineer' ? 'selected'
+                        : '' %>
+                        >Software Engineer</option>
+                    <option value="Data Analyst" <%=job && job.jobdesignation==='Data Analyst' ? 'selected' : '' %>>Data
+                        Analyst
+                    </option>
+                    <option value="Project Manager" <%=job && job.jobdesignation==='Project Manager' ? 'selected' : ''
+                        %>>Project
+                        Manager</option>
+                    <option value="UX Designer" <%=job && job.jobdesignation==='UX Designer' ? 'selected' : '' %>>UX
+                        Designer
+                    </option>
+                    <!-- Add more designations as needed -->
+                </select>
             </div>
 
             <!-- Job Location -->
-            <div class="mb-3">
+            <div class="col-md-12 col-sm-12 mb-2">
                 <label for="joblocation" class="form-label">Job Location</label>
                 <input type="text" class="form-control" id="joblocation" name="joblocation"
-                    value="<%= job.joblocation %>" required>
+                    value="<%= job ? job.joblocation : '' %>" required placeholder="Enter Job Location">
             </div>
 
             <!-- Company Name -->
-            <div class="mb-3">
+            <div class="col-md-12 col-sm-12 mb-2">
                 <label for="companyname" class="form-label">Company Name</label>
                 <input type="text" class="form-control" id="companyname" name="companyname"
-                    value="<%= job.companyname %>" required>
+                    value="<%= job ? job.companyname : '' %>" required placeholder="Enter Company Name">
             </div>
 
             <!-- Salary -->
-            <div class="mb-3">
+            <div class="col-md-6 col-sm-12 mb-2">
                 <label for="salary" class="form-label">Salary</label>
-                <input type="text" class="form-control" id="salary" name="salary" value="<%= job.salary %>" required>
+                <input type="text" class="form-control" id="salary" name="salary" value="<%= job ? job.salary : '' %>"
+                    required placeholder="Enter Salary Range">
             </div>
 
             <!-- Apply By Date -->
-            <div class="mb-3">
+            <div class="col-md-6 col-sm-12 mb-2">
                 <label for="applyby" class="form-label">Apply By</label>
                 <input type="date" class="form-control" id="applyby" name="applyby"
-                    value="<%= job.applyby.toISOString().substring(0, 10) %>" required>
+                    value="<%= job ? job.applyby.toISOString().substring(0, 10) : '' %>" required>
             </div>
 
             <!-- Skills Required -->
-            <div class="mb-3">
+            <div class="col-md-12 col-sm-12 mb-2">
                 <label for="skillsrequired" class="form-label">Skills Required</label>
-                <input type="text" class="form-control" id="skillsrequired" name="skillsrequired"
-                    value="<%= job.skillsrequired.join(', ') %>" required>
-                <small class="form-text text-muted">Separate skills with commas.</small>
+                <select class="form-select" id="skillsrequired" name="skillsrequired" multiple required>
+                    <option disabled>Select skills required for this job</option>
+                    <option value="React" <%=job && job.skillsrequired.includes('React') ? 'selected' : '' %>>React</option>
+                    <option value="NodeJs" <%=job && job.skillsrequired.includes('NodeJs') ? 'selected' : '' %>>NodeJs</option>
+                    <option value="Angular" <%=job && job.skillsrequired.includes('Angular') ? 'selected' : '' %>>Angular</option>
+                    <option value="MongoDB" <%=job && job.skillsrequired.includes('MongoDB') ? 'selected' : '' %>>MongoDB</option>
+                    <option value="SQL" <%=job && job.skillsrequired.includes('SQL') ? 'selected' : '' %>>SQL</option>
+                    <option value="Express" <%=job && job.skillsrequired.includes('Express') ? 'selected' : '' %>>Express</option>
+                    <option value="Java" <%=job && job.skillsrequired.includes('Java') ? 'selected' : '' %>>Java</option>
+                    <option value="SpringBoot" <%=job && job.skillsrequired.includes('SpringBoot') ? 'selected' : '' %>>SpringBoot
+                    </option>
+                    <option value="C++" <%=job && job.skillsrequired.includes('C++') ? 'selected' : '' %>>C++</option>
+                    <option value="Data Structures & Algo" <%=job && job.skillsrequired.includes('Data Structures & Algo') ? 'selected'
+                        : '' %>>Data Structures & Algo</option>
+                </select>
+                <small>Hold down the Ctrl (Windows) or Command (Mac) button to select multiple
+                    options.</small>
             </div>
 
             <!-- Number of Openings -->
-            <div class="mb-3">
+            <div class="col-md-6 col-sm-12 mb-2">
                 <label for="numberofopenings" class="form-label">Number of Openings</label>
                 <input type="number" class="form-control" id="numberofopenings" name="numberofopenings"
-                    value="<%= job.numberofopenings %>" required>
+                    value="<%= job ? job.numberofopenings: '' %>" required>
             </div>
+        </div>
 
-            <!-- Job Posted Date -->
-            <div class="mb-3">
-                <label for="jobposted" class="form-label">Job Posted Date</label>
-                <input type="date" class="form-control" id="jobposted" name="jobposted"
-                    value="<%= job.jobposted.toISOString().substring(0, 10) %>" required>
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100 py-2">Submit</button>
+    </form>
+</div>

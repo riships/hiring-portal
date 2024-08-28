@@ -3,10 +3,10 @@ const base64url = require('base64url');
 
 
 const authMiddleware = async (req, res, next) => {
-    const token = req.cookies.session;
+    const token = req.cookies.session || '';
 
     if (!token) {
-        return res.redirect("/");
+        return next();
     }
     try {
         const decoded = base64url.decode(token);
