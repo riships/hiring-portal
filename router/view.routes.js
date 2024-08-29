@@ -9,13 +9,13 @@ router.get('/', authMiddleware, (req, res) => {
     if (req.user) {
         userData = JSON.parse(req.user);
     }
-    res.render('index', { title: 'Home', name: userData ? userData.name : null });
+    res.render('index', { title: 'Home', successMessage: false, name: userData ? userData.name : null });
 });
 
 // Login page route
 router.get('/login', authMiddleware, (req, res) => {
     if (!req.user) {
-        res.render('login', { title: 'Login', name: null, });
+        res.render('login', { title: 'Login', successMessage: false, name: null, });
     } else (
         res.redirect('/')
     )
@@ -24,7 +24,7 @@ router.get('/login', authMiddleware, (req, res) => {
 // signup page route
 router.get('/signup', authMiddleware, (req, res) => {
     if (!req.user) {
-        res.render('signup', { title: 'SignUp', name: null, });
+        res.render('signup', { title: 'SignUp', name: null, successMessage: false });
     } else (
         res.redirect('/')
     )
@@ -32,7 +32,11 @@ router.get('/signup', authMiddleware, (req, res) => {
 
 
 router.get("/postjob", authMiddleware, (req, res) => {
-    res.render("jobposting", { title: 'Post Job', name: null, job: null })
+    if (req.user) {
+        res.render("jobposting", { title: 'Post Job', name: null, successMessage: false, job: null })
+    } else {
+        res.redirect("/")
+    }
 })
 
 

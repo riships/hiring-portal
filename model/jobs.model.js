@@ -5,7 +5,7 @@ module.exports = class JobService {
     static jobOpenings = [
         {
             id: '603d4f1f2f1b2c001c8b4567',
-            jobcategory: 'Software Engineering',
+            jobcategory: 'Software Development',
             jobdesignation: 'Frontend Developer',
             joblocation: 'New York',
             companyname: 'Tech Innovations Inc.',

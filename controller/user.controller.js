@@ -49,16 +49,14 @@ const userSignup = async function (req, res) {
         // Create user 
         let user = await User.createUser(name, email, password);
         if (!user) {
-            return res.render({message: "User not Created!" })
+            return res.render({ message: "User not Created!" })
         }
 
         // if everything ok return the user created
-        return res.status(200).json({ message: 'Success' }).end(() => {
-            customLogger(200);
-        });
+        return res.status(200).render("signup", { title: "Sign up", name: null, signupSuccess: true, message: "Signup Successful!" });
 
     } catch (error) {
-        return res.status(500).json({ success: false, message: "Internal server error." });
+        return res.status(500).render('error', { success: false, message: "Internal server error." });
     }
 }
 module.exports = { userLogin, userSignup };
