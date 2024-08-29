@@ -53,7 +53,9 @@ const userSignup = async function (req, res) {
         }
 
         // if everything ok return the user created
-        return res.status;
+        return res.status(200).json({ message: 'Success' }).end(() => {
+            customLogger(200);
+        });
 
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal server error." });

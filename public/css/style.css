@@ -2,7 +2,7 @@ body {
     background-color: #674bb1;
     font-family: "Open Sans", sans-serif;
     color: #fff;
-    background-image: url('../images/bg-mobile.png');
+    background-image: url('../public/images/bg-mobile.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -30,7 +30,7 @@ body {
 
 .login-form input {
     width: 100%;
-    padding: 1.2rem;
+    padding: 0.8rem;
     border-radius: 9px;
     border: none;
     background-color: rgba(103, 75, 177, 0.5);
@@ -89,6 +89,7 @@ body {
     max-width: 800px;
     margin: 0 auto;
 }
+
 .hero-buttons {
     display: flex;
     justify-content: start;
@@ -97,7 +98,7 @@ body {
 
 .btn {
     text-decoration: none;
-    padding: 15px 30px;
+    padding: 8px 30px;
     font-size: 1rem;
     border-radius: 5px;
     color: #aa4dbc;
@@ -121,19 +122,22 @@ body {
     border: 2px solid #fff;
 }
 
-.card-custom{
+.card-custom {
     background-color: #ffffff1c !important;
     min-width: 360px;
 }
-.text_dark{
+
+.text_dark {
     color: #904ec9;
 }
-.text-color{
+
+.text-color {
     color: #dfc4f4;
 }
 
-.card {
+.custom-card {
     border-radius: 15px;
+    background-color: #b762c81c !important;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -149,10 +153,6 @@ body {
     font-size: 1.5rem;
 }
 
-.card-body {
-    background-color: #ffffff;
-}
-
 .btn-custom {
     border-radius: 20px;
     font-size: 0.875rem;
@@ -163,12 +163,21 @@ body {
     background-color: #f39c12;
     border: none;
     color: #fff;
+    text-decoration: none;
 }
 
 .btn-custom-success {
     background-color: #2ecc71;
     border: none;
     color: #fff;
+    text-decoration: none;
+}
+
+.btn-custom-danger {
+    background-color: #db3243;
+    border: none;
+    color: #fff;
+    text-decoration: none;
 }
 
 .btn-custom-primary {
