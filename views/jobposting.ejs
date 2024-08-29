@@ -3,7 +3,8 @@
     <h1 class="text-center mb-4">
         <%= job ? 'Edit Job Details' : 'Add New Job' %>
     </h1>
-    <form style="width:450px; max-width: 450px;" action="<%= job ? `/jobs/${job._id}/edit` : '/jobs' %>" method="POST">
+    <form style="width:450px; max-width: 450px;" action="<%= job ? `/jobs/update/${job.id}?_method=PUT` : '/jobs' %>"
+        method="POST">
         <!-- Job Category -->
         <div class="row">
             <div class="col-md-12 col-sm-12 mb-2">
@@ -80,18 +81,25 @@
                 <label for="skillsrequired" class="form-label">Skills Required</label>
                 <select class="form-select" id="skillsrequired" name="skillsrequired" multiple required>
                     <option disabled>Select skills required for this job</option>
-                    <option value="React" <%=job && job.skillsrequired.includes('React') ? 'selected' : '' %>>React</option>
-                    <option value="NodeJs" <%=job && job.skillsrequired.includes('NodeJs') ? 'selected' : '' %>>NodeJs</option>
-                    <option value="Angular" <%=job && job.skillsrequired.includes('Angular') ? 'selected' : '' %>>Angular</option>
-                    <option value="MongoDB" <%=job && job.skillsrequired.includes('MongoDB') ? 'selected' : '' %>>MongoDB</option>
+                    <option value="React" <%=job && job.skillsrequired.includes('React') ? 'selected' : '' %>>React
+                    </option>
+                    <option value="NodeJs" <%=job && job.skillsrequired.includes('NodeJs') ? 'selected' : '' %>>NodeJs
+                    </option>
+                    <option value="Angular" <%=job && job.skillsrequired.includes('Angular') ? 'selected' : '' %>
+                        >Angular</option>
+                    <option value="MongoDB" <%=job && job.skillsrequired.includes('MongoDB') ? 'selected' : '' %>
+                        >MongoDB</option>
                     <option value="SQL" <%=job && job.skillsrequired.includes('SQL') ? 'selected' : '' %>>SQL</option>
-                    <option value="Express" <%=job && job.skillsrequired.includes('Express') ? 'selected' : '' %>>Express</option>
-                    <option value="Java" <%=job && job.skillsrequired.includes('Java') ? 'selected' : '' %>>Java</option>
-                    <option value="SpringBoot" <%=job && job.skillsrequired.includes('SpringBoot') ? 'selected' : '' %>>SpringBoot
+                    <option value="Express" <%=job && job.skillsrequired.includes('Express') ? 'selected' : '' %>
+                        >Express</option>
+                    <option value="Java" <%=job && job.skillsrequired.includes('Java') ? 'selected' : '' %>>Java
+                    </option>
+                    <option value="SpringBoot" <%=job && job.skillsrequired.includes('SpringBoot') ? 'selected' : '' %>
+                        >SpringBoot
                     </option>
                     <option value="C++" <%=job && job.skillsrequired.includes('C++') ? 'selected' : '' %>>C++</option>
-                    <option value="Data Structures & Algo" <%=job && job.skillsrequired.includes('Data Structures & Algo') ? 'selected'
-                        : '' %>>Data Structures & Algo</option>
+                    <option value="Data Structures & Algo" <%=job && job.skillsrequired.includes('Data Structures &
+                        Algo') ? 'selected' : '' %>>Data Structures & Algo</option>
                 </select>
                 <small>Hold down the Ctrl (Windows) or Command (Mac) button to select multiple
                     options.</small>

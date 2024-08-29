@@ -14,9 +14,8 @@ const getJobs = async function (req, res) {
         }
         let getAllJobs = JobService.findJobs();
         return res.render("jobs", { title: "Jobs", successMessage: false, name: userData ? userData.name : null, jobs: getAllJobs })
-        // return res.status(200).json({ success: true, data: getAllJobs })
     } catch (error) {
-        // return res.status(400).json({ success: false, error: error.message })
+        
         return res.status(500).render('error', { title: 'Error', successMessage: false, name: userData ? userData.name : null, message: 'Failed to load jobs. Please try again later.' });
 
     }
@@ -70,6 +69,8 @@ const updateJob = async (req, res) => {
     if (req.user) {
         userData = JSON.parse(req.user)
     }
+    console.log(jobData);
+
 
 
     if (!Object.keys(jobData).length > 0) {
