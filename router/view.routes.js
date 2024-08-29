@@ -32,8 +32,12 @@ router.get('/signup', authMiddleware, (req, res) => {
 
 
 router.get("/postjob", authMiddleware, (req, res) => {
+    let userData = null;
     if (req.user) {
-        res.render("jobposting", { title: 'Post Job', name: null, successMessage: false, job: null })
+        userData = JSON.parse(req.user);
+    }
+    if (req.user) {
+        res.render("jobposting", { title: 'Post Job', name: userData ? userData.name : null, successMessage: false, job: null })
     } else {
         res.redirect("/")
     }

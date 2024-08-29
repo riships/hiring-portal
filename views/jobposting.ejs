@@ -1,11 +1,9 @@
-<!-- views/jobForm.ejs -->
 <div class="my-5 d-flex flex-column align-items-center">
     <h1 class="text-center mb-4">
         <%= job ? 'Edit Job Details' : 'Add New Job' %>
     </h1>
     <form style="width:450px; max-width: 450px;" action="<%= job ? `/jobs/update/${job.id}?_method=PUT` : '/jobs' %>"
         method="POST">
-        <!-- Job Category -->
         <div class="row">
             <div class="col-md-12 col-sm-12 mb-2">
                 <label for="jobcategory" class="form-label">Job Category</label>
@@ -23,11 +21,9 @@
                         >Project
                         Management</option>
                     <option value="Design" <%=job && job.jobcategory==='Design' ? 'selected' : '' %>>Design</option>
-                    <!-- Add more categories as needed -->
                 </select>
             </div>
 
-            <!-- Job Designation -->
             <div class="col-md-12 col-sm-12 mb-2">
                 <label for="jobdesignation" class="form-label">Job Designation</label>
                 <select class="form-select" id="jobdesignation" name="jobdesignation" required>
@@ -44,39 +40,33 @@
                     <option value="UX Designer" <%=job && job.jobdesignation==='UX Designer' ? 'selected' : '' %>>UX
                         Designer
                     </option>
-                    <!-- Add more designations as needed -->
                 </select>
             </div>
 
-            <!-- Job Location -->
             <div class="col-md-12 col-sm-12 mb-2">
                 <label for="joblocation" class="form-label">Job Location</label>
                 <input type="text" class="form-control" id="joblocation" name="joblocation"
                     value="<%= job ? job.joblocation : '' %>" required placeholder="Enter Job Location">
             </div>
 
-            <!-- Company Name -->
             <div class="col-md-12 col-sm-12 mb-2">
                 <label for="companyname" class="form-label">Company Name</label>
                 <input type="text" class="form-control" id="companyname" name="companyname"
                     value="<%= job ? job.companyname : '' %>" required placeholder="Enter Company Name">
             </div>
 
-            <!-- Salary -->
             <div class="col-md-6 col-sm-12 mb-2">
                 <label for="salary" class="form-label">Salary</label>
                 <input type="text" class="form-control" id="salary" name="salary" value="<%= job ? job.salary : '' %>"
                     required placeholder="Enter Salary Range">
             </div>
 
-            <!-- Apply By Date -->
             <div class="col-md-6 col-sm-12 mb-2">
                 <label for="applyby" class="form-label">Apply By</label>
                 <input type="date" class="form-control" id="applyby" name="applyby"
                     value="<%= job ? job.applyby.toISOString().substring(0, 10) : '' %>" required>
             </div>
 
-            <!-- Skills Required -->
             <div class="col-md-12 col-sm-12 mb-2">
                 <label for="skillsrequired" class="form-label">Skills Required</label>
                 <select class="form-select" id="skillsrequired" name="skillsrequired" multiple required>
@@ -98,14 +88,12 @@
                         >SpringBoot
                     </option>
                     <option value="C++" <%=job && job.skillsrequired.includes('C++') ? 'selected' : '' %>>C++</option>
-                    <option value="Data Structures & Algo" <%=job && job.skillsrequired.includes('Data Structures &
-                        Algo') ? 'selected' : '' %>>Data Structures & Algo</option>
+                    <option value="Data Structures &amp; Algo" <%=job && job.skillsrequired.includes('Data Structures & Algo') ? 'selected' : '' %>>Data Structures & Algo</option>
                 </select>
                 <small>Hold down the Ctrl (Windows) or Command (Mac) button to select multiple
                     options.</small>
             </div>
 
-            <!-- Number of Openings -->
             <div class="col-md-6 col-sm-12 mb-2">
                 <label for="numberofopenings" class="form-label">Number of Openings</label>
                 <input type="number" class="form-control" id="numberofopenings" name="numberofopenings"
@@ -113,7 +101,6 @@
             </div>
         </div>
 
-        <!-- Submit Button -->
         <button type="submit" class="btn btn-primary w-100 py-2">Submit</button>
     </form>
 </div>
