@@ -43,5 +43,10 @@ router.get("/postjob", authMiddleware, (req, res) => {
     }
 })
 
+router.get("/apply", authMiddleware, (req, res) => {
+    res.render("application", { title: 'Apply', name: null, successMessage: false, job: null })
+
+})
+
 
 module.exports = router;

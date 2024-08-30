@@ -28,7 +28,7 @@ body {
     color: #fff;
 }
 
-.login-form input {
+.login-form input,.apllicatin-form input {
     width: 100%;
     padding: 0.8rem;
     border-radius: 9px;
@@ -37,11 +37,11 @@ body {
     color: #fff;
 }
 
-.login-form input::placeholder {
+.login-form input::placeholder,.apllicatin-form input::placeholder {
     color: #fff;
 }
 
-.login-form input:focus {
+.login-form input:focus,.apllicatin-form input:focus {
     outline: none;
     box-shadow: 0 0 0 4px rgba(253, 242, 233, 0.5);
     color: #fff;
@@ -55,7 +55,10 @@ body {
 }
 
 .login-form>.btn,
+.apllicatin-form>.btn,
 .login-form>.btn:link,
+.apllicatin-form>.btn:link,
+.apllicatin-form>.btn:visited,
 .login-form>.btn:visited {
     display: inline-block;
     text-decoration: none;
@@ -69,7 +72,8 @@ body {
     border: 2px solid #fff;
 }
 
-.login-form>button {
+.login-form>button,
+.apllicatin-form>button {
     outline: 1px solid #6f4cba;
 }
 
@@ -124,11 +128,11 @@ body {
 
 .card-custom {
     background-color: #ffffff1c !important;
-    min-width: 360px;
+    min-width: 420px;
 }
 
 .text_dark {
-    color: #904ec9;
+    color: #904ec9 !important;
 }
 
 .text-color {
@@ -207,4 +211,24 @@ body {
     background-color: #f1f1f1;
     padding: 0.5rem;
     border-radius: 5px;
+}
+
+.custom-file-upload {
+    border: 1px solid #aa4dbc;
+    display: inline-block;
+    padding: 0.8rem;
+    cursor: pointer;
+    border-radius: 9px;
+    background-color: #f8f9fa;
+    font-size: 16px;
+    font-weight: 400;
+    color: #495057;
+}
+
+.custom-file-upload:hover {
+    background-color: #e2e6ea;
+}
+
+.custom-file-input {
+    display: none;
 }

@@ -19,9 +19,11 @@
 
                 <h6 class="text-white">Skills Required:</h6>
                 <ul class="list-inline">
-                    <% job.skillsrequired.forEach((skill)=> { %>
-                    <li class="list-inline-item badge bg-primary"><%= skill %></li>
-                    <% }) %>
+                    <% if(Array.isArray(job.skillsrequired) && job.skillsrequired.length > 0){ %>
+                    <%- job.skillsrequired.map(skill=> `<li class="list-inline-item badge bg-primary">${skill}</li>`).join('') %>
+                    <% }else{ %>
+                        <li class="list-inline-item badge bg-primary"><%= job.skillsrequired %></li>
+                        <% } %>
                 </ul>
 
                 <div class="mt-3">

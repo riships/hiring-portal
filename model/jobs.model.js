@@ -10,7 +10,7 @@ module.exports = class JobService {
             joblocation: 'New York',
             companyname: 'Tech Innovations Inc.',
             salary: '$80,000 - $100,000',
-            applyby: new Date('2024-09-30'),
+            applyby: '2024-09-30',
             skillsrequired: ['React', 'JavaScript', 'CSS'],
             numberofopenings: 3,
             jobposted: new Date('2024-08-23'),
@@ -23,7 +23,7 @@ module.exports = class JobService {
             joblocation: 'San Francisco',
             companyname: 'Data Solutions LLC',
             salary: '$90,000 - $110,000',
-            applyby: new Date('2024-10-15'),
+            applyby:'2024-10-15',
             skillsrequired: ['Python', 'SQL', 'Excel'],
             numberofopenings: 2,
             jobposted: new Date('2024-08-20'),
@@ -36,7 +36,7 @@ module.exports = class JobService {
             joblocation: 'Chicago',
             companyname: 'Innovative Products Co.',
             salary: '$100,000 - $120,000',
-            applyby: new Date('2024-11-01'),
+            applyby: '2024-11-01',
             skillsrequired: ['Project Management', 'Agile', 'Communication'],
             numberofopenings: 1,
             jobposted: new Date('2024-08-25'),
@@ -49,7 +49,7 @@ module.exports = class JobService {
             joblocation: 'Austin',
             companyname: 'Marketing Pros Ltd.',
             salary: '$70,000 - $85,000',
-            applyby: new Date('2024-09-10'),
+            applyby: '2024-09-10',
             skillsrequired: ['SEO', 'Content Marketing', 'Social Media'],
             numberofopenings: 4,
             jobposted: new Date('2024-08-30'),
@@ -66,7 +66,7 @@ module.exports = class JobService {
         this.applyby = applyby;
         this.skillsrequired = skillsrequired;
         this.numberofopenings = numberofopenings;
-        this.jobposted = jobposted;
+        this.jobposted = new Date();
         this.applicants = [];
     }
 
