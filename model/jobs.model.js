@@ -23,7 +23,7 @@ module.exports = class JobService {
             joblocation: 'San Francisco',
             companyname: 'Data Solutions LLC',
             salary: '$90,000 - $110,000',
-            applyby:'2024-10-15',
+            applyby: '2024-10-15',
             skillsrequired: ['Python', 'SQL', 'Excel'],
             numberofopenings: 2,
             jobposted: new Date('2024-08-20'),
@@ -103,18 +103,25 @@ module.exports = class JobService {
         }
 
         const applicants = job.applicants.map(applicantId =>
-            ApplicantsService.getApplicant(applicantId)
+            ApplicantsService.getApplicantes(applicantId)
         ).filter(applicant => applicant !== null);
         return applicants;
     }
 
     static addApplicantToJob(jobId, applicantId) {
-        if (!applicantId && !jobId) {
+        if (!applicantId || !jobId) {
             return null;
         }
 
-        let jobObj = this.jobOpenings.find(job.id === id);
+        let jobObj = this.jobOpenings.find(job => job.id === jobId);
+
+        if (!jobObj) {
+            return null; // or an error message like `Job not found`
+        }
+
         jobObj.applicants.push(applicantId)
+
+        return jobObj;
 
     }
 

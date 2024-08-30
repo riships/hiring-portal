@@ -128,7 +128,8 @@ body {
 
 .card-custom {
     background-color: #ffffff1c !important;
-    min-width: 420px;
+    min-width: 360px;
+    width: 32%;
 }
 
 .text_dark {

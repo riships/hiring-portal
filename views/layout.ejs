@@ -58,7 +58,6 @@
     <main>
         <%- body %>     
     </main>
-    <section>
         <div class="modal fade" id="loginModalCenter" tabindex="-1" role="dialog" aria-labelledby="loginModalCenterTitle"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -113,37 +112,40 @@
                         <div class="row d-flex justify-content-center align-items-center">
                             <div class="col-12">
                                 <div class="container">
-                                    <form class="apllicatin-form" method="POST" action="/application?_method=PUT">
+                                    <% let jobId='defaultJobId' %> <!-- Set a default value if job is not provided -->
+                                        <% if (typeof job !=='undefined' ) { %>
+                                            <% jobId=job.id %>
+                                                <% } %>
+                                    <form enctype="multipart/form-data" class="apllicatin-form" method="POST" action="/jobs/<%= jobId %>/applicants">
                                         <!-- Name -->
                                         <div class="mb-3">
                                             <label for="name" class="form-label text_dark">Name</label>
-                                            <input type="text" id="name" placeholder="Enter your name" required>
+                                            <input type="text" name="name" id="name" placeholder="Enter your name" required>
                                         </div>
                                         <!-- Email -->
                                         <div class="mb-3">
                                             <label for="email" class="form-label text_dark">Email</label>
-                                            <input type="email" id="email" placeholder="Enter your email" required>
+                                            <input type="email" name="email" id="email" placeholder="Enter your email" required>
                                         </div>
                                         <!-- Phone Number -->
                                         <div class="mb-3">
                                             <label for="phone" class="form-label text_dark">Phone Number</label>
-                                            <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                                            <input type="tel" name="contact" id="phone" placeholder="Enter your phone number" required>
                                         </div>
                                         <!-- Resume -->
                                         <div class="mb-3">
                                             <label class="custom-file-upload w-100">
-                                                <input type="file" class="custom-file-input" id="resume"
+                                                <input type="file" class="custom-file-input" name="resumePath" id="resume"
                                                     accept=".pdf,.doc,.docx">
                                                 Choose File
                                                 <span id="fileName" class="ms-2 text_dark bl ps-3"
                                                     style="border-left: 1px solid #aa4dbc;">No file chosen</span>
                                             </label>
-        
                                         </div>
                                         <!-- Submit Button -->
                                         <button type="submit" class="btn btn--form w-100">Submit</button>
                                     </form>
-                                </div>l
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -153,7 +155,6 @@
                 </div>
             </div>
         </div>
-    </section>
     <% if (successMessage) { %>
         <script>
             document.addEventListener('DOMContentLoaded', function () {

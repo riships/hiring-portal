@@ -4,6 +4,7 @@ const expressLayouts = require('express-ejs-layouts');
 const viewRouter = require('./router/view.routes');
 const userApiRouter = require("./router/userApi.routes")
 const jobApiRouter = require("./router/jobApi.routes");
+const applicantApiRouter = require("./router/applicantApi.routes");
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
@@ -14,12 +15,16 @@ app.use(session({
     secret: 'rishiToken', // Used to sign the session ID cookie
     resave: false,
     saveUninitialized: true,
-    sameSite:true,
+    sameSite: true,
     cookie: { secure: false } // Set to true if using HTTPS
 }));
 
 
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static('public'));
+app.use('/uploads', express.static('uploads'));
+
+
+
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.set('views', './views');
@@ -37,6 +42,7 @@ app.use("/", viewRouter);
 
 app.use("/", jobApiRouter);
 app.use("/", userApiRouter);
+app.use("/", applicantApiRouter);
 
 
 app.listen(PORT, (err) => {

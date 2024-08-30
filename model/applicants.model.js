@@ -1,14 +1,17 @@
-module.exports = ApplicantsService = class {
+module.exports = class ApplicantsService {
     static allApplicant = []
     constructor(applicantid, name, email, contact, resumePath) {
-        applicantid = this.applicantid;
-        name = this.name;
-        email = this.email;
-        contact = this.contact;
-        resumePath = this.resumePath;
+        this.applicantid = applicantid;
+        this.name = name;
+        this.email = email;
+        this.contact = contact;
+        this.resumePath = resumePath;
+        this.appliedOn = new Date();
     }
 
-    static createApplicat(applicantid, name, email, contact, resumePath) {
+    static createApplicant(applicantData) {
+        const { applicantid, name, email, contact, resumePath } = applicantData
+        
         let applicant = new ApplicantsService(applicantid, name, email, contact, resumePath);
         if (!applicant) {
             return null;
@@ -16,9 +19,9 @@ module.exports = ApplicantsService = class {
         return applicant;
     }
 
-    static getApplicates(applicantid) {
+    static getApplicantes(applicantid) {
         if (id) {
-            return this.allApplicant.find(applicant.applicantid === applicantid);
+            return this.allApplicant.find(applicant => applicant.applicantid === applicantid);
         }
         return this.allApplicant;
     }
@@ -29,7 +32,7 @@ module.exports = ApplicantsService = class {
             return null
         }
 
-        let updatedApplicant = this.allApplicant.find(applicant.applicantid === applicantid);
+        let updatedApplicant = this.allApplicant.find(applicant => applicant.applicantid === applicantid);
 
         Object.assign(updatedApplicant, updatedData);
 
@@ -40,7 +43,7 @@ module.exports = ApplicantsService = class {
         if (!applicantid) {
             return null;
         }
-        let applicantIndex = this.allApplicant.findIndex(applicant.applicantid === applicantid);
+        let applicantIndex = this.allApplicant.findIndex(applicant => applicant.applicantid === applicantid);
 
         if (applicantIndex === -1) {
             return null;
