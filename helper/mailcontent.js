@@ -21,7 +21,7 @@ const mailContent = (applicantDetails, jobDetails) => {
                 <p>
                     If you're shortlisted, we'll contact you with the next steps. In the meantime, feel free to reach out if you have any questions.
                 </p>
-                <p>Thank you for considering <strong>${companyname}/strong>.</p>
+                <p>Thank you for considering <strong>${companyname}</strong>.</p>
                 <p>
                     Best Regards,<br>
                     ${companyname}
