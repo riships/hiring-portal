@@ -1,6 +1,5 @@
 const express = require('express');
-const { userLogin, userSignup } = require('../controller/user.controller');
-const { logOut } = require('../middleware/logout');
+const { userLogin, userSignup,userlogOut } = require('../controller/user.controller');
 const router = express.Router();
 
 // Login api
@@ -10,6 +9,6 @@ router.post('/login', userLogin);
 router.post('/signup', userSignup);
 
 // logout api
-router.get("/logout", logOut)
+router.get("/logout", userlogOut)
 
 module.exports = router;

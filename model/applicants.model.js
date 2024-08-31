@@ -12,10 +12,11 @@ module.exports = class ApplicantsService {
     static createApplicant(applicantData) {
         const { applicantid, name, email, contact, resumePath } = applicantData
 
-        let applicant = new ApplicantsService(applicantid, name, email, contact, resumePath);
+        let applicant = new ApplicantsService(applicantid, name, email, contact, resumePath);        
         if (!applicant) {
             return null;
         }
+        this.allApplicant.push(applicant);
         return applicant;
     }
 
