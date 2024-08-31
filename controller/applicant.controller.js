@@ -2,6 +2,8 @@ const { v4: uuidv4 } = require('uuid');
 const JobService = require('../model/jobs.model');
 const ApplicantsService = require('../model/applicants.model');
 const path = require('path');
+const { sendMail } = require('../helper/nodemailer');
+const { mailContent } = require('../helper/mailcontent');
 
 const jobApply = async (req, res) => {
     try {
@@ -30,7 +32,9 @@ const jobApply = async (req, res) => {
         }
 
         // Send a success response to the client
-        // return res.redirect("/jobs", 200, { )
+        let companyname = appliedJob.companyname.replace(/[ .,;:!@#$%^&*()\-_=+[\]{}|\\/'"?<>~`]/g, '').toLocaleLowerCase();        
+
+        sendMail({ from: `no-reply@${companyname}.com`, to: createdApplicant.email, subject: "Job Application Received", html: mailContent(createdApplicant, appliedJob) })
         return res.status(200).render("jobview", { title: "Jobs", successMessage: true, message: "Application submitted successfully", name: userData ? userData.name : null, job: appliedJob });
 
     } catch (error) {
