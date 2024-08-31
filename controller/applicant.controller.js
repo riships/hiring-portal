@@ -34,7 +34,7 @@ const jobApply = async (req, res) => {
         // Send a success response to the client
         let companyname = appliedJob.companyname.replace(/[ .,;:!@#$%^&*()\-_=+[\]{}|\\/'"?<>~`]/g, '').toLocaleLowerCase();        
 
-        sendMail({ from: `no-reply@${companyname}.com`, to: createdApplicant.email, subject: "Job Application Received", html: mailContent(createdApplicant, appliedJob) })
+        sendMail({ from: `no-reply@${companyname}.net`, to: createdApplicant.email, subject: "Job Application Received", html: mailContent(createdApplicant, appliedJob) })
         return res.status(200).render("jobview", { title: "Jobs", successMessage: true, message: "Application submitted successfully", name: userData ? userData.name : null, job: appliedJob });
 
     } catch (error) {
