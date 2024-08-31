@@ -14,7 +14,7 @@ module.exports = class JobService {
             skillsrequired: ['React', 'JavaScript', 'CSS'],
             numberofopenings: 3,
             jobposted: new Date('2024-08-23'),
-            applicants: []
+            applicants: [1]
         },
         {
             id: '603d4f1f2f1b2c001c8b4568',

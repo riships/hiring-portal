@@ -26,9 +26,16 @@
             </p>
             <p class="card-text" style="color: #f8f8f8;"><i class="bi bi-tools"></i> <strong>Required
                     Skills:</strong>
+                    <% if(Array.isArray(job.skillsrequired)){ %>
                 <%= job.skillsrequired.join(', ') %></p>
+                <% }else{ %>
+                    <%= job.skillsrequired %></p>
+                    <% } %>
                 <p class="card-text" style="color: #f8f8f8;"><i class="bi bi-people"></i> <strong>Number of Openings:</strong> 
                     <%= job.numberofopenings %></p>
+                <p class="card-text" style="color: #f8f8f8;"><i class="bi bi-person-lines-fill"></i> <strong>Number of Applicants:</strong>
+                    <a href="/jobs/<%= job.id %>/applicants"><%= job.applicants.length %></a>
+                </p>
                 <p class="card-text" style="color: #f8f8f8;"><i class="bi bi-calendar-day"></i> <strong>Job Posted Date:</strong> 
                     <%= job.jobposted.toDateString() %></p>
                 

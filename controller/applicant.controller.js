@@ -7,14 +7,16 @@ const jobApply = async (req, res) => {
     try {
         let jobById = req.params.id || req.query.id;
         let applicantData = req.body;
-
-        console.log(req.file);
+        let userData = null
+        if (req.user) {
+            userData = JSON.parse(req.user)
+        }
 
         let applicantId = uuidv4();
 
         // Check if the file exists and generate the file path
         if (req.file && req.file.filename) {
-            let filePath = req.get('origin') + '/public/uploads/' + req.file.filename;
+            let filePath = '/public/uploads/' + req.file.filename;
             applicantData['resumePath'] = filePath;
         }
 
@@ -22,20 +24,37 @@ const jobApply = async (req, res) => {
         let createdApplicant = await ApplicantsService.createApplicant({ applicantid: applicantId, ...applicantData });
 
         // If the applicant was created, add them to the job
+        let appliedJob = null
         if (createdApplicant) {
-            await JobService.addApplicantToJob(jobById, applicantId);
+            appliedJob = await JobService.addApplicantToJob(jobById, applicantId);
         }
 
         // Send a success response to the client
         // return res.redirect("/jobs", 200, { )
-        return res.redirect("/jobs/" + jobById, 200, { title: "Jobs", successMessage: true, message: "Application submitted successfully", name: null });
+        return res.status(200).render("jobview", { title: "Jobs", successMessage: true, message: "Application submitted successfully", name: userData ? userData.name : null, job: appliedJob });
 
     } catch (error) {
-        console.log(error);
-
         // Send an error response to the client
-        res.status(500).send({ message: 'An error occurred while applying for the job' });
+        res.status(500).render("error", { title: "Error", message: 'An error occurred while applying for the job' });
     }
 }
 
-module.exports = { jobApply };
+
+
+const jobApplicantsById = async (req, res) => {
+    let userData = null;
+    let jobId = req.query.id || req.params.id;
+    if (req.user) {
+        userData = JSON.parse(req.user);
+    }
+    if (req.user) {
+        if (jobId) {
+            let applicansList = JobService.getApplicatsOfJob(jobId)
+            res.render("applicantsTable", { title: 'Applicants', name: userData ? userData.name : null, successMessage: false, applicants: applicansList })
+        }
+    } else {
+        res.redirect("/jobs/" + jobId)
+    }
+}
+
+module.exports = { jobApply, jobApplicantsById };

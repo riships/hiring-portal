@@ -1,11 +1,11 @@
-module.exports = class User{
-    static users = [{ name: "rishi", email: "avviare.rishi@gmail.com", password: "rishi@1234", createdDate: "" }];
-    constructor(name, email, password,) {
+module.exports = class User {
+    static users = [{ name: "Rishi", email: "avviare.rishi@gmail.com", password: "1", createdDate: "", lastActiveDate: '' }];
+    constructor(name, email, password, lastActiveDate) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.createdDate = new Date().toLocaleDateString() + new Date().toLocaleTimeString();
-
+        this.lastActiveDate = lastActiveDate
     }
 
     static createUser(name, email, password) {

@@ -1,0 +1,40 @@
+<div class="container mt-5 p-3 shadow" style="background: #ffffff38;">
+    <h2 class="mb-4">Applicants</h2>
+    <table class="w-100 table-bordered table-striped shadow" cellpadding="10">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Application Date</th>
+                <th>Resume</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% applicants.forEach((applicant, index)=> { %>
+                <tr>
+                    <td>
+                        <%= index + 1 %>
+                    </td>
+                    <td>
+                        <%= applicant.name %>
+                    </td>
+                    <td>
+                        <%= applicant.email %>
+                    </td>
+                    <td>
+                        <%= applicant.contact %>
+                    </td>
+                    <td>
+                        <%= new Date(applicant.applicationDate).toDateString() %>
+                    </td>
+                    <td>
+                        <a class="btn py-1" href="<%= applicant.resumePath %>" target="_blank">View</a>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+
+    </table>
+</div>

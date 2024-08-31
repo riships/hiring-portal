@@ -1,9 +1,14 @@
 const express = require('express');
-const { jobApply } = require('../controller/applicant.controller');
+const { jobApply, jobApplicantsById } = require('../controller/applicant.controller');
 const router = express.Router();
-const upload = require('../middleware/fileupload')
+const upload = require('../middleware/fileupload');
+const { authMiddleware } = require('../middleware/auth');
+
 // Applicant api
 router.post('/jobs/:id/applicants', upload, jobApply);
+
+// Get all applicants for a Job
+router.get('/jobs/:id/applicants', authMiddleware, jobApplicantsById)
 
 
 module.exports = router;

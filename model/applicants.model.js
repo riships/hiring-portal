@@ -1,17 +1,17 @@
 module.exports = class ApplicantsService {
-    static allApplicant = []
+    static allApplicant = [{ "applicantid": 1, "name": "Rishi", "email": "avviare.rishi@gmail.com", "contact": "9315265049", "resumePath": "/public/uploads/StockVerificationExportToPdf.pdf", "applicationDate": "Sat Aug 31 2024 12:05:24 GMT+0530 (India Standard Time)" }]
     constructor(applicantid, name, email, contact, resumePath) {
         this.applicantid = applicantid;
         this.name = name;
         this.email = email;
         this.contact = contact;
         this.resumePath = resumePath;
-        this.appliedOn = new Date();
+        this.applicationDate = new Date();
     }
 
     static createApplicant(applicantData) {
         const { applicantid, name, email, contact, resumePath } = applicantData
-        
+
         let applicant = new ApplicantsService(applicantid, name, email, contact, resumePath);
         if (!applicant) {
             return null;
@@ -20,7 +20,7 @@ module.exports = class ApplicantsService {
     }
 
     static getApplicantes(applicantid) {
-        if (id) {
+        if (applicantid) {
             return this.allApplicant.find(applicant => applicant.applicantid === applicantid);
         }
         return this.allApplicant;

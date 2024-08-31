@@ -27,8 +27,13 @@ const userLogin = async function (req, res) {
 
         // Set the cookie
         res.cookie('session', sessionData, {
-            httpOnly: true, // Prevent client-side JavaScript from accessing the cookie
-            maxAge: 24 * 60 * 60 * 1000 // Cookie expiration time (24 hours)
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000
+        });
+
+        res.cookie('lastActiveDate', new Date(), {
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000
         });
 
         res.redirect('/');
@@ -53,7 +58,7 @@ const userSignup = async function (req, res) {
         }
 
         // if everything ok return the user created
-        return res.status(200).render("signup", { title: "Sign up", name: null, signupSuccess: true, message: "Signup Successful!" });
+        return res.status(200).render("signup", { title: "Sign up", name: null, successMessage: true, message: "Signup Successful!" });
 
     } catch (error) {
         return res.status(500).render('error', { success: false, message: "Internal server error." });

@@ -12,6 +12,7 @@ const methodOverride = require('method-override');
 const app = express();
 app.use(cookieParser());
 app.use(session({
+    name: 'session.id',
     secret: 'rishiToken', // Used to sign the session ID cookie
     resave: false,
     saveUninitialized: true,
