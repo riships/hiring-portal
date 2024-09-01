@@ -146,4 +146,42 @@ const updateJob = async (req, res) => {
 
     }
 }
-module.exports = { getJobs, postJob, updateJob }
+
+
+const deleteJob = async (req, res) => {
+    let jobId = req.params.id || req.query.id
+
+    try {
+        if (!jobId) {
+            return res.status(500).render('error', {
+                titileActiveDate: [{ title: "Error", lastVisited: lastActiveDate }],
+                successMessage: false,
+                name: userData ? userData.name : null,
+                message: 'Failed to Delete Job!'
+            })
+        }
+        let deletedJob = JobService.removeJob(jobId) 
+        if (!deletedJob) {
+            return res.status(403).render('error', {
+                titileActiveDate: [{ title: "Error", lastVisited: lastActiveDate }],
+                successMessage: false,
+                name: userData ? userData.name : null,
+                message: 'Failed to Delete Job Due to internal Server Error!'
+            })
+        }
+
+        return res.status(200).json({ message:"Job deleted successfully." })
+
+    } catch (error) {
+        return res.status(401).render('error', {
+            titileActiveDate: [{ title: "Error", lastVisited: lastActiveDate }],
+            successMessage: false,
+            name: userData ? userData.name : null,
+            message: 'Failed to Delete Job Due to internal Server Error!'
+        })
+    }
+    
+}
+
+
+module.exports = { getJobs, postJob, updateJob, deleteJob }

@@ -1,4 +1,4 @@
-const { getJobs, postJob, updateJob } = require('../controller/jobs.controller');
+const { getJobs, postJob, updateJob, deleteJob } = require('../controller/jobs.controller');
 const express = require('express');
 const { authMiddleware } = require('../middleware/auth');
 const router = express.Router();
@@ -17,6 +17,9 @@ router.put("/jobs/update/:id", authMiddleware, updateJob)
 
 
 router.get("/jobs/update/:id", authMiddleware, updateJob)
+
+
+router.delete("/jobs/delete/:id", authMiddleware, deleteJob)
 
 
 

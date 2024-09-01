@@ -129,11 +129,28 @@ module.exports = class JobService {
         if (!jobId && !applicantId) {
             return null;
         }
-        let findJob = this.jobOpenings.find(job.id === jobId);
-        let applicantIndex = findJob.applicants.findIndex(appli === applicantId);
+        let findJob = this.jobOpenings.find(job => job.id === jobId);
+        let applicantIndex = findJob.applicants.findIndex(appli => appli === applicantId);
 
         return findJob.applicants.splice(applicantIndex, 1)[0];
 
     }
+
+    static removeJob(jobId) {
+        if (!jobId) {
+            return null; // Return null if no jobId is provided
+        }
+
+        // Find the index of the job with the given ID
+        let findJobIndex = this.jobOpenings.findIndex(job => job.id === jobId);
+
+        // If the job is not found, return null
+        if (findJobIndex === -1) {
+            return null;
+        }
+        // Remove the job from the array and return the removed job
+        return this.jobOpenings.splice(findJobIndex, 1)[0];
+    }
+
 
 }
