@@ -3,6 +3,7 @@ const base64url = require('base64url');
 
 
 const userLogin = async function (req, res) {
+    let lastActiveDate = null
     if (req.lastVisitDate) {
         lastActiveDate = req.lastVisitDate
     }
@@ -67,6 +68,10 @@ const userLogin = async function (req, res) {
 }
 
 const userSignup = async function (req, res) {
+    let lastActiveDate = null
+    if (req.lastVisitDate) {
+        lastActiveDate = req.lastVisitDate
+    }
     try {
         const { name, email, password } = req.body;
 
@@ -110,6 +115,10 @@ const userSignup = async function (req, res) {
 
 
 const logOut = async (req, res) => {
+    let lastActiveDate = null
+    if (req.lastVisitDate) {
+        lastActiveDate = req.lastVisitDate
+    }
     // Clear session
     req.session.destroy(err => {
         if (err) {

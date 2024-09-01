@@ -51,6 +51,10 @@ const jobApply = async (req, res) => {
 
 const jobApplicantsById = async (req, res) => {
     let userData = null;
+    let lastActiveDate = null
+    if (req.lastVisitDate) {
+        lastActiveDate = req.lastVisitDate
+    }
     let jobId = req.query.id || req.params.id;
     if (req.user) {
         userData = JSON.parse(req.user);

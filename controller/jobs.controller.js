@@ -6,6 +6,7 @@ const getJobs = async function (req, res) {
     if (req.user) {
         userData = JSON.parse(req.user)
     }
+    let lastActiveDate = null
     if (req.lastVisitDate) {
         lastActiveDate = req.lastVisitDate
     }
@@ -47,6 +48,7 @@ const postJob = async function (req, res) {
     if (req.user) {
         userData = JSON.parse(req.user)
     }
+    let lastActiveDate = null
     if (req.lastVisitDate) {
         lastActiveDate = req.lastVisitDate
     }
@@ -105,6 +107,7 @@ const updateJob = async (req, res) => {
     if (req.user) {
         userData = JSON.parse(req.user)
     }
+    let lastActiveDate = null
     if (req.lastVisitDate) {
         lastActiveDate = req.lastVisitDate
     }
@@ -131,7 +134,7 @@ const updateJob = async (req, res) => {
             if (updatedJob) {
                 return res.redirect("/jobs", 200,
                     {
-                        title: "Jobs",
+                        titileActiveDate: [{ title: "Jobs", lastVisited: lastActiveDate }],
                         successMessage: true,
                         message: "Job Updated Successfully.",
                         name: userData ? userData.name : null
