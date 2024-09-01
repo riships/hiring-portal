@@ -53,6 +53,9 @@ router.get("/postjob", authMiddleware, (req, res) => {
     if (req.user) {
         userData = JSON.parse(req.user);
     }
+    if (req.lastVisitDate) {
+        lastActiveDate = req.lastVisitDate
+    }
     if (req.user) {
         res.render("jobposting", {
             titileActiveDate: [{ title: "Post Job", lastVisited: lastActiveDate }], 
