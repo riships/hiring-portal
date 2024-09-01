@@ -1,5 +1,5 @@
 module.exports = class ApplicantsService {
-    static allApplicant = [{ "applicantid": 1, "name": "Rishi", "email": "avviare.rishi@gmail.com", "contact": "9315265049", "resumePath": "/public/uploads/StockVerificationExportToPdf.pdf", "applicationDate": "Sat Aug 31 2024 12:05:24 GMT+0530 (India Standard Time)" }]
+    static allApplicant = [{ "applicantid": 1, "name": "Rishi", "email": "avviare.rishi@gmail.com", "contact": "9315265049", "resumePath": "/public/uploads/1725115261065__rishi_resume.pdf", "applicationDate": "Sat Aug 31 2024 12:05:24 GMT+0530 (India Standard Time)" }]
     constructor(applicantid, name, email, contact, resumePath) {
         this.applicantid = applicantid;
         this.name = name;

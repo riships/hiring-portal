@@ -5,7 +5,7 @@ const upload = require('../middleware/fileupload');
 const { authMiddleware } = require('../middleware/auth');
 
 // Applicant api
-router.post('/jobs/:id/applicants', upload, jobApply);
+router.post('/jobs/:id/applicants', authMiddleware, upload, jobApply);
 
 // Get all applicants for a Job
 router.get('/jobs/:id/applicants', authMiddleware, jobApplicantsById)

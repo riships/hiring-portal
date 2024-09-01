@@ -3,7 +3,8 @@ const base64url = require('base64url');
 const authMiddleware = async (req, res, next) => {
     res.cookie('lastActiveDate', new Date());
     const token = req.cookies.session || '';
-
+    const lastVisitDate = req.cookies.lastActiveDate || '';
+    req.lastVisitDate = lastVisitDate
     if (!token) {
         return next(); // No token, move to the next middleware
     }
@@ -15,7 +16,6 @@ const authMiddleware = async (req, res, next) => {
         next();
     } catch (err) {
         // Handle token errors (e.g., invalid token)
-        
         return res.redirect("/"); // Redirect to the homepage
     }
 };

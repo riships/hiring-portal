@@ -6,6 +6,10 @@ const { sendMail } = require('../helper/nodemailer');
 const { mailContent } = require('../helper/mailcontent');
 
 const jobApply = async (req, res) => {
+    let lastActiveDate = null
+    if (req.lastVisitDate) {
+        lastActiveDate = req.lastVisitDate
+    }
     try {
         let jobById = req.params.id || req.query.id;
         let applicantData = req.body;
@@ -32,14 +36,14 @@ const jobApply = async (req, res) => {
         }
 
         // Send a success response to the client
-        let companyname = appliedJob.companyname.replace(/[ .,;:!@#$%^&*()\-_=+[\]{}|\\/'"?<>~`]/g, '').toLocaleLowerCase();        
+        let companyname = appliedJob.companyname.replace(/[ .,;:!@#$%^&*()\-_=+[\]{}|\\/'"?<>~`]/g, '').toLocaleLowerCase();
 
-        sendMail({ from: `no-reply@${companyname}.net`, to: createdApplicant.email, subject: "Job Application Received", html: mailContent(createdApplicant, appliedJob) })
-        return res.status(200).render("jobview", { title: "Jobs", successMessage: true, message: "Application submitted successfully", name: userData ? userData.name : null, job: appliedJob });
+        sendMail({ from: `no-reply@${companyname}.xyz`, to: createdApplicant.email, subject: "Job Application Received", html: mailContent(createdApplicant, appliedJob) })
+        return res.status(200).render("jobview", { titileActiveDate : [{ title: "Jobs", lastVisited: lastActiveDate }], successMessage: true, message: "Application submitted successfully", name: userData ? userData.name : null, job: appliedJob });
 
     } catch (error) {
         // Send an error response to the client
-        res.status(500).render("error", { title: "Error", message: 'An error occurred while applying for the job' });
+        res.status(500).render("error", { titileActiveDate: [{ title: "Error", lastVisited: lastActiveDate }], name: userData ? userData.name : null, successMessage: false, message: 'An error occurred while applying for the job' });
     }
 }
 
@@ -54,10 +58,10 @@ const jobApplicantsById = async (req, res) => {
     if (req.user) {
         if (jobId) {
             let applicansList = JobService.getApplicatsOfJob(jobId)
-            res.render("applicantsTable", { title: 'Applicants', name: userData ? userData.name : null, successMessage: false, applicants: applicansList })
+            res.render("applicantsTable", { titileActiveDate: [{ title: "Applicants", lastVisited: lastActiveDate }], name: userData ? userData.name : null, successMessage: false, applicants: applicansList })
         }
     } else {
-        res.redirect("/jobs/" + jobId)
+        res.status(401).render("error", { titileActiveDate: [{ title: "Not Authorize", lastVisited: lastActiveDate }], message:"You are not authorize to access this page.", name: userData ? userData.name : null, successMessage: false, applicants: null })
     }
 }
 

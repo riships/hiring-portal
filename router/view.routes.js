@@ -9,13 +9,23 @@ router.get('/', authMiddleware, (req, res) => {
     if (req.user) {
         userData = JSON.parse(req.user);
     }
-    res.render('index', { title: 'Home', successMessage: false, name: userData ? userData.name : null });
+    if (req.lastVisitDate) {
+        lastActiveDate = req.lastVisitDate
+    }
+    res.render('index', { titileActiveDate: [{ title: "Home", lastVisited: lastActiveDate }], successMessage: false, name: userData ? userData.name : null });
 });
 
 // Login page route
 router.get('/login', authMiddleware, (req, res) => {
+    if (req.lastVisitDate) {
+        lastActiveDate = req.lastVisitDate
+    }
     if (!req.user) {
-        res.render('login', { title: 'Login', successMessage: false, name: null, });
+        res.render('login', { 
+            titileActiveDate: [{ title: "Login", lastVisited: lastActiveDate }], 
+            successMessage: false, 
+            name: null
+        });
     } else (
         res.redirect('/')
     )
@@ -23,8 +33,15 @@ router.get('/login', authMiddleware, (req, res) => {
 
 // signup page route
 router.get('/signup', authMiddleware, (req, res) => {
+    if (req.lastVisitDate) {
+        lastActiveDate = req.lastVisitDate
+    }
     if (!req.user) {
-        res.render('signup', { title: 'SignUp', name: null, successMessage: false });
+        res.render('signup', { 
+            titileActiveDate: [{ title: "Sign up", lastVisited: lastActiveDate }],
+            name: null, 
+            successMessage: false 
+        });
     } else (
         res.redirect('/')
     )
@@ -37,7 +54,12 @@ router.get("/postjob", authMiddleware, (req, res) => {
         userData = JSON.parse(req.user);
     }
     if (req.user) {
-        res.render("jobposting", { title: 'Post Job', name: userData ? userData.name : null, successMessage: false, job: null })
+        res.render("jobposting", {
+            titileActiveDate: [{ title: "Post Job", lastVisited: lastActiveDate }], 
+            name: userData ? userData.name : null,
+             successMessage: false, 
+             job: null 
+            })
     } else {
         res.redirect("/")
     }

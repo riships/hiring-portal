@@ -6,17 +6,37 @@ const getJobs = async function (req, res) {
     if (req.user) {
         userData = JSON.parse(req.user)
     }
+    if (req.lastVisitDate) {
+        lastActiveDate = req.lastVisitDate
+    }
     try {
         const jobId = req.query.id || req.params.id;
         if (jobId) {
             let jobById = await JobService.findJobs(jobId);
-            return res.render("jobview", { title: "Job", successMessage: false, name: userData ? userData.name : null, job: jobById })
+            return res.render("jobview",
+                {
+                    titileActiveDate: [{ title: "Job", lastVisited: lastActiveDate }],
+                    successMessage: false,
+                    name: userData ? userData.name : null,
+                    job: jobById
+                })
         }
         let getAllJobs = JobService.findJobs();
-        return res.render("jobs", { title: "Jobs", successMessage: false, name: userData ? userData.name : null, jobs: getAllJobs })
+        return res.render("jobs",
+            {
+                titileActiveDate: [{ title: "Jobs", lastVisited: lastActiveDate }],
+                successMessage: false,
+                name: userData ? userData.name : null,
+                jobs: getAllJobs
+            })
     } catch (error) {
-
-        return res.status(500).render('error', { title: 'Error', successMessage: false, name: userData ? userData.name : null, message: 'Failed to load jobs. Please try again later.' });
+        return res.status(500).render('error',
+            {
+                titileActiveDate: [{ title: "Error", lastVisited: lastActiveDate }],
+                successMessage: false,
+                name: userData ? userData.name : null,
+                message: 'Failed to load jobs. Please try again later.'
+            });
 
     }
 }
@@ -27,10 +47,19 @@ const postJob = async function (req, res) {
     if (req.user) {
         userData = JSON.parse(req.user)
     }
+    if (req.lastVisitDate) {
+        lastActiveDate = req.lastVisitDate
+    }
     try {
         let jobData = req.body;
         if (!jobData) {
-            return res.status(401).render('error', { title: "Error", successMessage: false, name: userData ? userData.name : null, message: 'Failed to post Job. Please try again later.' })
+            return res.status(401).render('error',
+                {
+                    titileActiveDate: [{ title: "Error", lastVisited: lastActiveDate }],
+                    successMessage: false,
+                    name: userData ? userData.name : null,
+                    message: 'Failed to post Job. Please try again later.'
+                })
         }
 
         // Convert skillsrequired to an array if it's not already
@@ -43,18 +72,24 @@ const postJob = async function (req, res) {
 
         if (!createJob) {
             return res.status(500).render('error', {
-                title: "Error",
+                titileActiveDate: [{ title: "Error", lastVisited: lastActiveDate }],
                 name: req.user ? req.user.name : null,
                 successMessage: false,
                 message: 'Failed to post Job. Please try again later.'
             });
         }
         // Redirect to the job listing page or any other page after success
-        return res.redirect('/jobs', 302, { title: "Jobs", successMessage: true, message: "Job Posted Successfully.", name: userData ? userData.name : null });
+        return res.redirect('/jobs', 302,
+            {
+                title: "Jobs",
+                successMessage: true,
+                message: "Job Posted Successfully.",
+                name: userData ? userData.name : null
+            });
     }
     catch (error) {
         return res.status(500).render('error', {
-            title: "Error",
+            titileActiveDate: [{ title: "Error", lastVisited: lastActiveDate }],
             successMessage: false,
             name: userData ? userData.name : null,
             message: 'Failed to post Job due to an internal server error!'
@@ -70,11 +105,20 @@ const updateJob = async (req, res) => {
     if (req.user) {
         userData = JSON.parse(req.user)
     }
+    if (req.lastVisitDate) {
+        lastActiveDate = req.lastVisitDate
+    }
     try {
         if (!Object.keys(jobData).length > 0) {
             const jobData = JobService.findJobs(jobId);
             if (jobData) {
-                return res.render("jobposting", { title: "Edit Job", successMessage: false, name: userData ? userData.name : null, job: jobData })
+                return res.render("jobposting",
+                    {
+                        titileActiveDate: [{ title: "Edit Job", lastVisited: lastActiveDate }],
+                        successMessage: false,
+                        name: userData ? userData.name : null,
+                        job: jobData
+                    })
             }
         }
 
@@ -85,7 +129,13 @@ const updateJob = async (req, res) => {
             );
             let updatedJob = JobService.findAndupdateJob(jobId, changeData)
             if (updatedJob) {
-                return res.redirect("/jobs", 200, { title: "Jobs", successMessage: true, message: "Job Updated Successfully.", name: userData ? userData.name : null })
+                return res.redirect("/jobs", 200,
+                    {
+                        title: "Jobs",
+                        successMessage: true,
+                        message: "Job Updated Successfully.",
+                        name: userData ? userData.name : null
+                    })
             }
         }
     } catch (error) {

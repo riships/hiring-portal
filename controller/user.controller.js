@@ -3,23 +3,41 @@ const base64url = require('base64url');
 
 
 const userLogin = async function (req, res) {
+    if (req.lastVisitDate) {
+        lastActiveDate = req.lastVisitDate
+    }
     try {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.status(400).json({ message: "Email and password are required." });
+            return res.status(400).render("error", { 
+                    titileActiveDate: [{ title: "Error", lastVisited: lastActiveDate }],
+                    name: null, successMessage: 
+                    false, 
+                    message: "Email and password are required." 
+                });
         }
 
         // Find the user by email 
         let user = await User.getUserByEmail(email);
         if (!user) {
-            return res.status(401).json({ success: false, message: "User not found!" })
+            return res.status(401).render("error", { 
+                titileActiveDate: [{ title: "Error", lastVisited: lastActiveDate }], 
+                name: null, 
+                successMessage: false, 
+                message: "User not found!" 
+            })
         }
 
         // check if the user's password is correct or not
         let checkPass = user.password === password
         if (!checkPass) {
-            return res.status(401).json({ message: "Invalid email or password." });
+            return res.status(401).render("error", { 
+                titileActiveDate: [{ title: "Error", lastVisited: lastActiveDate }],
+                name: null, 
+                successMessage: false, 
+                message: "Invalid email or password." 
+            });
         }
 
         // if everything ok return the user
@@ -39,7 +57,12 @@ const userLogin = async function (req, res) {
         res.redirect('/');
 
     } catch (error) {
-        return res.status(500).json({ success: false, message: "Internal server error." });
+        return res.status(500).render("error", { 
+            titileActiveDate: [{ title: "Error", lastVisited: lastActiveDate }],
+            name: null, 
+            successMessage: false, 
+            message: "Internal server error." 
+        });
     }
 }
 
@@ -48,20 +71,40 @@ const userSignup = async function (req, res) {
         const { name, email, password } = req.body;
 
         if (!email || !password || !name) {
-            return res.status(400).json({ message: "Name, Email and password are required." });
+            return res.status(400).render("error", { 
+                titileActiveDate: [{ title: "Error", lastVisited: lastActiveDate }], 
+                name: null, 
+                successMessage: false, 
+                message: "Name, Email and password are required." 
+            });
         }
 
         // Create user 
         let user = await User.createUser(name, email, password);
         if (!user) {
-            return res.render({ message: "User not Created!" })
+            return res.render("error", { 
+                titileActiveDate: [{ title: "Error", lastVisited: lastActiveDate }], 
+                name: null, 
+                successMessage: false, 
+                message: "User not Created!" 
+            })
         }
 
         // if everything ok return the user created
-        return res.status(200).render("signup", { title: "Sign up", name: null, successMessage: true, message: "Signup Successful!" });
+        return res.status(200).render("signup", { 
+            titileActiveDate: [{ title: "Sign up", lastVisited: lastActiveDate }],
+            name: null, 
+            successMessage: true, 
+            message: "Signup Successful!" 
+        });
 
     } catch (error) {
-        return res.status(500).render('error', { success: false, message: "Internal server error." });
+        return res.status(500).render("error", { 
+            titileActiveDate: [{ title: "Error", lastVisited: lastActiveDate }],
+            name: null, 
+            successMessage: false, 
+            message: "Internal server error." 
+        });
     }
 }
 
@@ -70,7 +113,12 @@ const logOut = async (req, res) => {
     // Clear session
     req.session.destroy(err => {
         if (err) {
-            return res.status(500).send('Error occurred during logout');
+            return res.status(500).render("error", { 
+                titileActiveDate: [{ title: "Error", lastVisited: lastActiveDate }],
+                name: null, 
+                successMessage: false, 
+                message: 'Error occurred during logout' 
+            });
         }
 
         // Clear cookies if needed
