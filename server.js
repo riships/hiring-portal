@@ -11,11 +11,6 @@ const methodOverride = require('method-override');
 
 const app = express();
 app.use(cookieParser());
-
-
-app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
 app.use(session({
     name: 'session.id',
     secret: 'rishiToken', // Used to sign the session ID cookie
@@ -26,6 +21,8 @@ app.use(session({
 }));
 
 
+app.use('/public', express.static('public'));
+app.use('/uploads', express.static('uploads'));
 
 
 
